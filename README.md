@@ -36,9 +36,9 @@ The system demonstrates how modern AI can create adaptive, self-evolving securit
 
 The system is built in three layers:
 
-1. **Network Simulation Layer** — GNS3 3.0.6 with 2 routers, 2 Layer-3 switches, 4 access switches, and 8 end hosts
-2. **Monitoring & Digital Twin Layer** — Telegraf, InfluxDB, Grafana, and NetBox for real-time metrics and network documentation
-3. **AI Intelligence Layer** — Custom RL environment + agents powered by stable-baselines3 and Gymnasium
+1. **Network Simulation Layer** : GNS3 3.0.6 with 2 routers, 2 Layer-3 switches, 4 access switches, and 8 end hosts
+2. **Monitoring & Digital Twin Layer** : Telegraf, InfluxDB, Grafana, and NetBox for real-time metrics and network documentation
+3. **AI Intelligence Layer** : Custom RL environment + agents powered by stable-baselines3 and Gymnasium
 
 All components are connected securely via ZeroTier VPN for team collaboration.
 
