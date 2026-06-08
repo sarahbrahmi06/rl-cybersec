@@ -3,7 +3,6 @@
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org)
 [![GNS3](https://img.shields.io/badge/GNS3-3.0+-green.svg)](https://gns3.com)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 **Real-time cybersecurity simulation where AI agents learn to attack and defend an enterprise network.**
 
