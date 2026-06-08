@@ -30,6 +30,12 @@ The system demonstrates how modern AI can create adaptive, self-evolving securit
 - Competitive self-play between Red and Blue agents
 - Modular architecture with clear separation of infrastructure and AI layers
 
+<<<<<<< HEAD
+=======
+**Telemetry mode (dry-run):** set `TELEMETRY_MODE = "synthetic"` in `config.py` to train
+without InfluxDB. This generates synthetic state vectors for pipeline testing only.
+
+>>>>>>> Agents
 ---
 
 ## Architecture

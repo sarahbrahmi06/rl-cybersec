@@ -1,0 +1,202 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:1rem 0}
+h3{font-size:13px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.06em;margin:1.5rem 0 .5rem}
+h3:first-child{margin-top:0}
+table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+th{background:var(--color-background-secondary);color:var(--color-text-secondary);font-weight:500;font-size:11px;text-align:left;padding:6px 8px;border-bottom:1px solid var(--color-border-secondary)}
+td{padding:5px 8px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;white-space:nowrap}
+.b-purple{background:#EEEDFE;color:#3C3489}
+.b-teal{background:#E1F5EE;color:#085041}
+.b-blue{background:#E6F1FB;color:#0C447C}
+.b-amber{background:#FAEEDA;color:#633806}
+.b-coral{background:#FAECE7;color:#712B13}
+.b-green{background:#EAF3DE;color:#27500A}
+.b-gray{background:#F1EFE8;color:#444441}
+.b-red{background:#FCEBEB;color:#791F1F}
+.mono{font-family:var(--font-mono);font-size:11px}
+.section-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:1.25rem}
+.section-head{padding:8px 12px;font-size:12px;font-weight:500;border-bottom:0.5px solid var(--color-border-tertiary)}
+.sh-blue{background:#E6F1FB;color:#0C447C}
+.sh-teal{background:#E1F5EE;color:#085041}
+.sh-purple{background:#EEEDFE;color:#3C3489}
+.sh-amber{background:#FAEEDA;color:#633806}
+.sh-coral{background:#FAECE7;color:#712B13}
+.ok{color:var(--color-text-success)}
+.warn{color:var(--color-text-warning)}
+</style>
+<div class="wrap">
+
+<div class="section-card">
+<div class="section-head sh-blue">Devices &amp; interfaces (Verified Working)</div>
+<table>
+<colgroup><col style="width:14%"><col style="width:12%"><col style="width:17%"><col style="width:13%"><col style="width:22%"><col style="width:22%"></colgroup>
+<thead>
+<tr><th>Device</th><th>Interface</th><th>IP / mask</th><th>Connected to</th><th>Role</th><th>Protocol</th> </tr>
+</thead>
+<tbody>
+<tr><td rowspan="3"><span class="badge b-coral">Firewall</span><br><span style="font-size:10px;color:var(--color-text-secondary)">Alpine-Firewall-1</span></td>
+<td class="mono">eth0</td><td class="mono">10.10.10.1/30</td><td class="mono">Router1 Gi0/1</td><td>Left uplink</td><td><span class="badge b-blue">Static + Routes</span></td></tr>
+<tr><td class="mono">eth1</td><td class="mono">10.10.20.1/30</td><td class="mono">Router2 Gi0/1</td><td>Right uplink</td><td><span class="badge b-blue">Static + Routes</span></td></tr>
+<tr><td class="mono">eth2</td><td class="mono">192.168.122.181/24</td><td class="mono">NAT2</td><td>Internet / NAT</td><td><span class="badge b-gray">DHCP (persistent)</span></td></tr>
+
+<tr><td rowspan="2"><span class="badge b-teal">Router1</span><br><span style="font-size:10px;color:var(--color-text-secondary)">OSPF ID 1.1.1.1</span></td>
+<td class="mono">Gi0/1</td><td class="mono">10.10.10.2/30</td><td class="mono">Firewall eth0</td><td>Uplink to FW</td><td><span class="badge b-blue">Static + OSPF</span></td></tr>
+<tr><td class="mono">Gi0/0</td><td class="mono">20.0.0.2/30</td><td class="mono">SwitchL31 Gi0/2</td><td>Core downlink</td><td><span class="badge b-purple">OSPF area 0</span></td></tr>
+
+<tr><td rowspan="2"><span class="badge b-teal">Router2</span><br><span style="font-size:10px;color:var(--color-text-secondary)">OSPF ID 2.2.2.2</span></td>
+<td class="mono">Gi0/1</td><td class="mono">10.10.20.2/30</td><td class="mono">Firewall eth1</td><td>Uplink to FW</td><td><span class="badge b-blue">Static + OSPF</span></td></tr>
+<tr><td class="mono">Gi0/0</td><td class="mono">192.168.2.1/30</td><td class="mono">SwitchL32 Gi0/2</td><td>Core downlink</td><td><span class="badge b-purple">OSPF area 0</span></td></tr>
+
+<tr><td rowspan="4"><span class="badge b-purple">SwitchL31</span><br><span style="font-size:10px;color:var(--color-text-secondary)">OSPF ID 3.3.3.1</span></td>
+<td class="mono">Gi0/2</td><td class="mono">20.0.0.1/30</td><td class="mono">Router1 Gi0/0</td><td>L3 uplink</td><td><span class="badge b-purple">OSPF area 0</span></td></tr>
+<tr><td class="mono">Vlan10 SVI</td><td class="mono">192.168.10.1/24</td><td>Switch1, Switch2</td><td>Gateway Vlan10</td><td><span class="badge b-purple">OSPF stub ✅</span></td></tr>
+<tr><td class="mono">Vlan20 SVI</td><td class="mono">192.168.20.1/24</td><td>Switch1, Switch2</td><td>Gateway Vlan20</td><td><span class="badge b-purple">OSPF stub ✅</span></td></tr>
+<tr><td class="mono">Gi0/3</td><td class="mono">172.16.0.1/24</td><td class="mono">Cloud1</td><td>Mgmt / tap</td><td><span class="badge b-gray">Management</span></td></tr>
+
+<tr><td rowspan="4"><span class="badge b-purple">SwitchL32</span><br><span style="font-size:10px;color:var(--color-text-secondary)">OSPF ID 3.3.3.2</span></td>
+<td class="mono">Gi0/2</td><td class="mono">192.168.2.2/30</td><td class="mono">Router2 Gi0/0</td><td>L3 uplink</td><td><span class="badge b-purple">OSPF area 0</span></td></tr>
+<tr><td class="mono">Vlan30 SVI</td><td class="mono">192.168.30.1/24</td><td>Switch3</td><td>Gateway Vlan30</td><td><span class="badge b-purple">OSPF stub ✅</span></td></tr>
+<tr><td class="mono">Vlan40 SVI</td><td class="mono">192.168.40.1/24</td><td>Switch4</td><td>Gateway Vlan40</td><td><span class="badge b-purple">OSPF stub ✅</span></td></tr>
+<tr><td class="mono">Vlan50 SVI</td><td class="mono">10.20.20.1/24</td><td>Switch4</td><td>Gateway Vlan50</td><td><span class="badge b-purple">OSPF stub ✅</span></td></tr>
+
+<tr><td rowspan="3"><span class="badge b-gray">Switch1</span></td>
+<td class="mono">Gi0/3 trunk</td><td class="mono">—</td><td class="mono">SwitchL31 Gi0/0</td><td>Trunk up</td><td><span class="badge b-gray">802.1q 10,20 ✅</span></td></tr>
+<tr><td class="mono">Gi0/0 access</td><td class="mono">—</td><td class="mono">PC1</td><td>Access port</td><td><span class="badge b-gray">Vlan10 ✅</span></td></tr>
+<tr><td class="mono">Gi0/1 access</td><td class="mono">—</td><td class="mono">PC2</td><td>Access port</td><td><span class="badge b-gray">Vlan10 ✅</span></td></tr>
+<tr><td class="mono">Gi0/2 access</td><td class="mono">—</td><td class="mono">PC3</td><td>Access port</td><td><span class="badge b-gray">Vlan20 ✅</span></td></tr>
+
+<tr><td rowspan="2"><span class="badge b-gray">Switch2</span></td>
+<td class="mono">Gi0/2 trunk</td><td class="mono">—</td><td class="mono">SwitchL31 Gi0/1</td><td>Trunk up</td><td><span class="badge b-gray">802.1q 10,20</span></td></tr>
+<tr><td class="mono">Gi0/0 access</td><td class="mono">—</td><td class="mono">PC4</td><td>Access port</td><td><span class="badge b-gray">Vlan20</span></td></tr>
+<tr><td class="mono">Gi0/1 access</td><td class="mono">—</td><td class="mono">PC5</td><td>Access port</td><td><span class="badge b-gray">Vlan10</span></td></tr>
+
+<tr><td rowspan="3"><span class="badge b-gray">Switch3</span></td>
+<td class="mono">Gi0/2 trunk</td><td class="mono">—</td><td class="mono">SwitchL32 Gi0/0</td><td>Trunk up</td><td><span class="badge b-gray">802.1q 30 ✅</span></td></tr>
+<tr><td class="mono">Gi0/0 access</td><td class="mono">—</td><td class="mono">PC6</td><td>Access port</td><td><span class="badge b-gray">Vlan30 ✅</span></td></tr>
+<tr><td class="mono">Gi0/1 access</td><td class="mono">—</td><td class="mono">PC7</td><td>Access port</td><td><span class="badge b-gray">Vlan30 ✅</span></td></tr>
+
+<tr><td rowspan="2"><span class="badge b-gray">Switch4</span></td>
+<td class="mono">Gi0/1 trunk</td><td class="mono">—</td><td class="mono">SwitchL32 Gi0/3</td><td>Trunk up</td><td><span class="badge b-gray">802.1q 50</span></td></tr>
+<tr><td class="mono">Gi0/0 access</td><td class="mono">—</td><td class="mono">PC8</td><td>Access port</td><td><span class="badge b-gray">Vlan40</span></td></tr>
+
+<tr><td><span class="badge b-red">Victim-1</span></td>
+<td class="mono">eth0</td><td class="mono">10.20.20.200/24</td><td class="mono">SwitchL32 Vlan50</td><td>Attack target</td><td><span class="badge b-red">Docker / SSH ✅</span></td></tr>
+<tr><td><span class="badge b-gray">Cloud2</span></td>
+<td class="mono">tap0</td><td class="mono">10.20.20.254/24</td><td class="mono">SwitchL32 e4</td><td>Host tap / monitor</td><td><span class="badge b-gray">TAP / ZeroTier</span></td></tr>
+<tr><td><span class="badge b-gray">NAT2</span></td>
+<td class="mono">nat0</td><td class="mono">192.168.122.1</td><td class="mono">Firewall eth2</td><td>Default gateway</td><td><span class="badge b-gray">NAT / MASQ ✅</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section-card">
+<div class="section-head sh-teal">End hosts (Verified)</div>
+<table>
+<colgroup><col style="width:8%"><col style="width:18%"><col style="width:18%"><col style="width:10%"><col style="width:14%"><col style="width:16%"><col style="width:16%"></colgroup>
+<thead>
+<tr><th>Host</th><th>IP / mask</th><th>Gateway</th><th>VLAN</th><th>Subnet</th><th>Access switch</th><th>Port</th></tr>
+</thead>
+<tbody>
+<tr><td>PC1</td><td class="mono">192.168.10.10/24</td><td class="mono">192.168.10.1</td><td><span class="badge b-blue">10</span></td><td class="mono">192.168.10.0/24</td><td>Switch1</td><td class="mono">Gi0/0 ✅</td></tr>
+<tr><td>PC2</td><td class="mono">192.168.10.11/24</td><td class="mono">192.168.10.1</td><td><span class="badge b-blue">10</span></td><td class="mono">192.168.10.0/24</td><td>Switch1</td><td class="mono">Gi0/1 ✅</td></tr>
+<tr><td>PC3</td><td class="mono">192.168.20.11/24</td><td class="mono">192.168.20.1</td><td><span class="badge b-teal">20</span></td><td class="mono">192.168.20.0/24</td><td>Switch1</td><td class="mono">Gi0/2 ✅</td></tr>
+<tr><td>PC4</td><td class="mono">192.168.20.10/24</td><td class="mono">192.168.20.1</td><td><span class="badge b-teal">20</span></td><td class="mono">192.168.20.0/24</td><td>Switch2</td><td class="mono">Gi0/0</td></tr>
+<tr><td>PC5</td><td class="mono">192.168.10.12/24</td><td class="mono">192.168.10.1</td><td><span class="badge b-blue">10</span></td><td class="mono">192.168.10.0/24</td><td>Switch2</td><td class="mono">Gi0/1</td></tr>
+<tr><td>PC6</td><td class="mono">192.168.30.10/24</td><td class="mono">192.168.30.1</td><td><span class="badge b-purple">30</span></td><td class="mono">192.168.30.0/24</td><td>Switch3</td><td class="mono">Gi0/0 ✅</td></tr>
+<tr><td>PC7</td><td class="mono">192.168.30.11/24</td><td class="mono">192.168.30.1</td><td><span class="badge b-purple">30</span></td><td class="mono">192.168.30.0/24</td><td>Switch3</td><td class="mono">Gi0/1 ✅</td></tr>
+<tr><td>PC8</td><td class="mono">192.168.40.10/24</td><td class="mono">192.168.40.1</td><td><span class="badge b-amber">40</span></td><td class="mono">192.168.40.0/24</td><td>Switch4</td><td class="mono">Gi0/0</td></tr>
+<tr><td>Victim-1</td><td class="mono">10.20.20.200/24</td><td class="mono">10.20.20.1</td><td><span class="badge b-red">50</span></td><td class="mono">10.20.20.0/24</td><td>SwitchL32</td><td class="mono">eth0 ✅</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section-card">
+<div class="section-head sh-purple">OSPF neighbors — area 0</div>
+<table>
+<colgroup><col style="width:22%"><col style="width:14%"><col style="width:22%"><col style="width:14%"><col style="width:16%"><col style="width:12%"></colgroup>
+<thead>
+<tr><th>Router</th><th>Router ID</th><th>Neighbor</th><th>Neighbor ID</th><th>Interface / address</th><th>State</th></tr>
+</thead>
+<tbody>
+<tr><td>Router1</td><td class="mono">1.1.1.1</td><td>SwitchL31</td><td class="mono">3.3.3.1</td><td class="mono">Gi0/0 → 20.0.0.1</td><td><span class="badge b-green ok">✓ FULL/DR</span></td></tr>
+<tr><td>Router2</td><td class="mono">2.2.2.2</td><td>SwitchL32</td><td class="mono">3.3.3.2</td><td class="mono">Gi0/0 → 192.168.2.2</td><td><span class="badge b-green ok">✓ FULL/BDR</span></td></tr>
+<tr><td>SwitchL31</td><td class="mono">3.3.3.1</td><td>Router1</td><td class="mono">1.1.1.1</td><td class="mono">Gi0/2 → 20.0.0.2</td><td><span class="badge b-green ok">✓ FULL/BDR</span></td></tr>
+<tr><td>SwitchL32</td><td class="mono">3.3.3.2</td><td>Router2</td><td class="mono">2.2.2.2</td><td class="mono">Gi0/2 → 192.168.2.1</td><td><span class="badge b-green ok">✓ FULL/DR</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section-card">
+<div class="section-head sh-amber">Static routes (Verified)</div>
+<table>
+<colgroup><col style="width:18%"><col style="width:22%"><col style="width:22%"><col style="width:20%"><col style="width:18%"></colgroup>
+<thead>
+<tr><th>Device</th><th>Destination</th><th>Next-hop</th><th>Via interface</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td>Firewall</td><td class="mono">0.0.0.0/0</td><td class="mono">192.168.122.1</td><td class="mono">eth2</td><td>Default / Internet ✅</td></tr>
+<tr><td>Firewall</td><td class="mono">192.168.10.0/24</td><td class="mono">10.10.10.2</td><td class="mono">eth0</td><td>→ Vlan10 ✅</td></tr>
+<tr><td>Firewall</td><td class="mono">192.168.20.0/24</td><td class="mono">10.10.10.2</td><td class="mono">eth0</td><td>→ Vlan20 ✅</td></tr>
+<tr><td>Firewall</td><td class="mono">192.168.30.0/24</td><td class="mono">10.10.20.2</td><td class="mono">eth1</td><td>→ Vlan30 ✅</td></tr>
+<tr><td>Firewall</td><td class="mono">192.168.40.0/24</td><td class="mono">10.10.20.2</td><td class="mono">eth1</td><td>→ Vlan40 ✅</td></tr>
+<tr><td>Firewall</td><td class="mono">10.20.20.0/24</td><td class="mono">10.10.20.2</td><td class="mono">eth1</td><td>→ Vlan50 / Victim ✅</td></tr>
+<tr><td>Firewall</td><td class="mono">20.0.0.0/30</td><td class="mono">10.10.10.2</td><td class="mono">eth0</td><td>→ R1-SwitchL31 ✅</td></tr>
+<tr><td>Firewall</td><td class="mono">192.168.2.0/30</td><td class="mono">10.10.20.2</td><td class="mono">eth1</td><td>→ R2-SwitchL32 ✅</td></tr>
+<tr><td>Router1</td><td class="mono">0.0.0.0/0</td><td class="mono">10.10.10.1</td><td class="mono">Gi0/1</td><td>Default → FW ✅</td></tr>
+<tr><td>Router2</td><td class="mono">0.0.0.0/0</td><td class="mono">10.10.20.1</td><td class="mono">Gi0/1</td><td>Default → FW ✅</td></tr>
+<tr><td>SwitchL31</td><td class="mono">0.0.0.0/0</td><td class="mono">20.0.0.2</td><td class="mono">Gi0/2</td><td>Default → R1 ✅</td></tr>
+<tr><td>SwitchL32</td><td class="mono">0.0.0.0/0</td><td class="mono">192.168.2.1</td><td class="mono">Gi0/2</td><td>Default → R2 ✅</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section-card">
+<div class="section-head sh-coral">VLAN map (Verified)</div>
+<table>
+<colgroup><col style="width:8%"><col style="width:16%"><col style="width:18%"><col style="width:18%"><col style="width:16%"><col style="width:24%"></colgroup>
+<thead>
+<tr><th>VLAN</th><th>Name</th><th>Subnet</th><th>SVI gateway</th><th>L3 switch</th><th>Hosts</th></tr>
+</thead>
+<tbody>
+<tr><td><span class="badge b-blue">10</span></td><td>PC1_PC2_PC5</td><td class="mono">192.168.10.0/24</td><td class="mono">192.168.10.1</td><td>SwitchL31</td><td>PC1, PC2, PC5 ✅</td></tr>
+<tr><td><span class="badge b-teal">20</span></td><td>PC3_PC4</td><td class="mono">192.168.20.0/24</td><td class="mono">192.168.20.1</td><td>SwitchL31</td><td>PC3, PC4 ✅</td></tr>
+<tr><td><span class="badge b-purple">30</span></td><td>VLAN0030</td><td class="mono">192.168.30.0/24</td><td class="mono">192.168.30.1</td><td>SwitchL32</td><td>PC6, PC7 ✅</td></tr>
+<tr><td><span class="badge b-amber">40</span></td><td>VLAN0040</td><td class="mono">192.168.40.0/24</td><td class="mono">192.168.40.1</td><td>SwitchL32</td><td>PC8 ✅</td></tr>
+<tr><td><span class="badge b-red">50</span></td><td>VLAN0050</td><td class="mono">10.20.20.0/24</td><td class="mono">10.20.20.1</td><td>SwitchL32</td><td>Victim-1 ✅</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="section-card">
+<div class="section-head sh-teal">Connectivity status (Verified Working)</div>
+<table>
+<colgroup><col style="width:35%"><col style="width:15%"><col style="width:50%"></colgroup>
+<thead>
+<tr><th>Path</th><th>Status</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td>Firewall ↔ Router1/Router2</td><td><span class="badge b-green ok">✓ Working</span></td><td>Ping success both ways ✅</td></tr>
+<tr><td>Router1 ↔ SwitchL31</td><td><span class="badge b-green ok">✓ OSPF FULL</span></td><td>Neighbor 3.3.3.1, DR/BDR elected ✅</td></tr>
+<tr><td>Router2 ↔ SwitchL32</td><td><span class="badge b-green ok">✓ OSPF FULL</span></td><td>Neighbor 3.3.3.2, DR/BDR elected ✅</td></tr>
+<tr><td>PC1/PC2/PC5 → gateway</td><td><span class="badge b-green ok">✓ Working</span></td><td>192.168.10.1 reachable ✅</td></tr>
+<tr><td>PC3/PC4 → gateway</td><td><span class="badge b-green ok">✓ Working</span></td><td>192.168.20.1 reachable ✅</td></tr>
+<tr><td>PC6/PC7 → gateway</td><td><span class="badge b-green ok">✓ Working</span></td><td>192.168.30.1 reachable ✅</td></tr>
+<tr><td>PC1 → PC6 (cross-network)</td><td><span class="badge b-green ok">✓ Working</span></td><td>Full routed path via firewall confirmed ✅</td></tr>
+<tr><td>Alpine → PC6 (192.168.30.10)</td><td><span class="badge b-green ok">✓ Working</span></td><td>ttl=62 ~1.3ms ✅</td></tr>
+<tr><td>Alpine → PC1 (192.168.10.10)</td><td><span class="badge b-green ok">✓ Working</span></td><td>ttl=62 ~1.2ms ✅</td></tr>
+<tr><td>Firewall → Victim-1</td><td><span class="badge b-green ok">✓ Working</span></td><td>ping 10.20.20.200 success ✅</td></tr>
+<tr><td>PC1 → Victim-1</td><td><span class="badge b-green ok">✓ Working</span></td><td>ttl=59 ~7ms confirmed ✅</td></tr>
+<tr><td>Firewall iptables rules</td><td><span class="badge b-green ok">✓ Loaded</span></td><td>DROP from eth2, ACCEPT LAN↔LAN ✅</td></tr>
+<tr><td>Alpine routes persistence</td><td><span class="badge b-green ok">✓ Working</span></td><td>10 routes saved in /etc/local.d/routes.start ✅</td></tr>
+<tr><td>SSH access to Firewall</td><td><span class="badge b-green ok">✓ Working</span></td><td>root@192.168.122.181 ✅</td></tr>
+<tr><td>Python 3.11</td><td><span class="badge b-green ok">✓ Installed</span></td><td>Permanent on Alpine ✅</td></tr>
+<tr><td>All configs survive reboot</td><td><span class="badge b-green ok">✓ Verified</span></td><td>Routes, iptables, interfaces persistent ✅</td></tr>
+</tbody>
+</table>
+</div>
+
+</div>

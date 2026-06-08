@@ -1,0 +1,9 @@
+influxdb-client>=1.50.0
+numpy
+requests
+torch
+gymnasium
+scikit-learn
+pandas
+tensorboard
+matplotlib
