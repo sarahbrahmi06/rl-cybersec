@@ -51,18 +51,3 @@ All components are connected securely via ZeroTier VPN for team collaboration.
 ---
 
 ## Repository Structure
-
-```bash
-rl-cybersec/
-├── environment/           # Core RL Environment (Sarah)
-│   ├── gns3_connector.py
-│   ├── state_collector.py
-│   └── environment.py
-├── agents/                # RL Agents (Houssem)
-│   ├── red_agent.py
-│   ├── blue_agent.py
-│   └── train.py
-├── monitoring/            # Grafana dashboards & configs
-├── docs/
-├── requirements.txt
-└── README.md
