@@ -406,7 +406,7 @@ class NetworkEnvironment(gym.Env):
                          and not self._backdoor_active
                          and not self._config_tampered)
             if all_clear:
-                base *= 2.0
+                base *= 1.25
 
             # Response speed bonus: fewer steps since attack = bigger bonus
             if attacks_before:
@@ -426,7 +426,7 @@ class NetworkEnvironment(gym.Env):
 
         # Proactive detection bonus: Blue detected before damage (attacks_before existed)
         if action["category"] == "proactive" and attacks_before:
-            base += PROACTIVE_DETECT_BONUS * 0.5
+            base += PROACTIVE_DETECT_BONUS * 0.25
 
         # Honeypot bonus: successfully trapped Red
         if self.honeypot_triggered and action["name"] == "Honeypot Deployment":

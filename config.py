@@ -258,19 +258,19 @@ SCENARIO_TYPES = [
     "partial_defense",      # Blue starts with honeypot pre-deployed
     "stealth",              # Red must stay below anomaly threshold to score
 ]
-STEALTH_ANOMALY_THRESHOLD = 0.35    # Anomaly score above this = Red detected
+STEALTH_ANOMALY_THRESHOLD = 0.40    # Anomaly score above this = Red detected
 
 # ─────────────────────────────────────────────
 # Reward Config
 # ─────────────────────────────────────────────
-STEALTH_BONUS             = 5.0     # Red bonus when anomaly stays below threshold
-HONEYPOT_PENALTY          = 30.0    # Red penalty if honeypot is triggered
-HONEYPOT_BONUS            = 25.0    # Blue bonus for trapping Red in honeypot
-CORE_DOWN_STEP_PENALTY    = 2.0     # Blue penalty per step while core is down
-WASTED_MOVE_PENALTY       = 2.0     # Blue penalty for acting when no matching attack active
-RESPONSE_SPEED_BONUS_MAX  = 5.0     # Blue bonus for 1-step response
-PROACTIVE_DETECT_BONUS    = 10.0    # Blue bonus for detecting attack before full impact
-CHAIN_INTERRUPT_BONUS     = 30.0    # Blue bonus for stopping kill chain before Stage 4
+STEALTH_BONUS             = 7.0     # Red bonus when anomaly stays below threshold
+HONEYPOT_PENALTY          = 15.0    # Red penalty if honeypot is triggered
+HONEYPOT_BONUS            = 10.0    # Blue bonus for trapping Red in honeypot
+CORE_DOWN_STEP_PENALTY    = 3.0     # Blue penalty per step while core is down
+WASTED_MOVE_PENALTY       = 3.0     # Blue penalty for acting when no matching attack active
+RESPONSE_SPEED_BONUS_MAX  = 2.0     # Blue bonus for 1-step response
+PROACTIVE_DETECT_BONUS    = 4.0     # Blue bonus for detecting attack before full impact
+CHAIN_INTERRUPT_BONUS     = 12.0    # Blue bonus for stopping kill chain before Stage 4
 
 # ─────────────────────────────────────────────
 # DQN Hyperparameters
@@ -289,7 +289,7 @@ HIDDEN_DIM_2        = 128
 # ─────────────────────────────────────────────
 # Training
 # ─────────────────────────────────────────────
-EPISODES            = 300
+EPISODES            = 100
 MAX_STEPS_PER_EP    = 20
 STEP_DELAY          = 2.5        # seconds to wait for GNS3 state to propagate
 SAVE_INTERVAL       = 50         # save models every N episodes

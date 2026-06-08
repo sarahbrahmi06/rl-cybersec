@@ -60,12 +60,12 @@ class PrioritisedReplayBuffer:
     is above a threshold are stored in a "hot" priority queue sampled at higher
     frequency.  All other transitions go into the normal replay memory.
 
-    Sampling ratio: 60 % from hot (anomaly) memory, 40 % from normal memory
+    Sampling ratio: 30 % from hot (anomaly) memory, 70 % from normal memory
     (subject to availability).
     """
 
-    ANOMALY_PRIORITY_THRESHOLD = 0.30   # anomaly score that triggers priority
-    HOT_RATIO = 0.60                    # fraction of batch from priority queue
+    ANOMALY_PRIORITY_THRESHOLD = 0.45   # anomaly score that triggers priority
+    HOT_RATIO = 0.30                    # fraction of batch from priority queue
 
     def __init__(self, maxlen: int = MEMORY_SIZE):
         self.normal = deque(maxlen=maxlen)
